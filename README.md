@@ -7,7 +7,7 @@ Initially the ReactJs project must be built, we use webpack to bundle the requir
 In order to do so, webpack and its dependency node modules must be installed. The required dependencies are shown in the package.json file.
 
 If you intend to setup from barebones, the instructions provided below can help you to achieve the setup of a ReactJs project
-1) The package.json packages must first be installed with 'npm install' followed by the definition of .babelrc file.
+1) The package.json packages must first be installed with 'npm install' followed by the definition of the .babelrc file.
 2) src folder must be created with Index.html, App.js and Index.js files, where the Index.html contains a div html element with an id of "root",
 App.js containing your main ReactJs application component and Index.js performs the rendering of your App.js component into your root div element.
 3) webpack.config.js must be configured to build a bundle.js file using the source folder; HTML, CSS and File loaders may need to be installed 
