@@ -1,5 +1,5 @@
 # DjangoReactJsProjectSetup
-This project provides the setup structure for a Django-ReactJs application
+This project provides the setup structure for an integrated Django-ReactJs application.
 
 This repository provides the folder structure and configuration files to setup an integrated Django and ReactJs project.
 The Backend folder contains a Frontend folder, in this case the Frontend contains a ReactJs project.
