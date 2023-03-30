@@ -4,7 +4,7 @@ This project provides the setup structure for an integrated Django-ReactJs appli
 This repository provides the folder structure and configuration files to setup an integrated Django and ReactJs project.
 The Backend folder contains a Frontend folder, in this case the Frontend contains a ReactJs project.
 
-# ReactJs setup
+# Project setup procedure
 Initially the ReactJs project must be built, we use webpack to bundle the required ReactJs and Vanilla Javascript files in a single bundle.js.
 In order to do so, webpack and its dependency node modules must be installed. The required dependencies are shown in the package.json file.
 
