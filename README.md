@@ -21,6 +21,6 @@ to build the final bundle and HTML files.
 The paths should include the path to the Frontend/dist folder.
 8) Define STATIC_URL to a URL path of your choosing, this URL path will be removed from the URL request to a static file and matched with paths
 in the STATICFILES_DIR
-e.g <script defer="defer" src="/assets/Core_CRUD/bundle.js">, /assets/ will be truncated and the remaining path matched in paths within STATICFILES_DIRS
+e.g <script defer="defer" src="/assets/Core_CRUD/bundle.js">, /assets/ will be removed and the remaining path matched in paths within STATICFILES_DIRS
 
 Alternatively for a simpler approach, its possible to clone the project to your working directory using "git clone". Changing the configuration of webpack.config.js, package.json, django settings.py and dist folder build files to suit your application requirements.
