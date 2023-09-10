@@ -117,8 +117,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/assets/'     #This the URL prefix to use in HTML which static files are accessible, not the directory of the statics 
-STATICFILES_DIRS = [        #If used in HTML templates, /assets/ of the path is removed and searched in BASE_DIR/Assets
-    BASE_DIR / 'FrontEnd/dist',    #Looks for static files in /static in app folder then the folder BASE_DIR/Assets
+STATICFILES_DIRS = [        #If used in HTML templates, /assets/ of the path is removed and searched in STATICFILES_DIRS
+    BASE_DIR / 'FrontEnd/dist',    #Looks for static files in /static in app folder then the folder STATICFILES_DIRS
 ]
 STATIC_ROOT = BASE_DIR / "static_cdn"   #python manage,py collectstatic collects static from STATIC_URL
 
