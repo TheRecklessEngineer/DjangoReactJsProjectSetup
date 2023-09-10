@@ -7,7 +7,7 @@ Initially the ReactJs project must be built, we use webpack to resolve all depen
 In order to do so, webpack and its dependency node modules must be installed. The required development and production stage dependencies for the project are shown in the package.json file.
 
 For setting the project from barebones, the instructions will allow you to complete the setup of both the Django and React projects.
-1) Install package.json file using node package manager, with 'npm install -y'
+1) Initalize a new Node project with 'npm init -y'
 2) Install React with npm:
 npm install react react-dom 
 react and react-dom node packages will be apart of your production dependencies, you can view them in package.json
