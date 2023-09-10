@@ -1,25 +1,77 @@
 # DjangoReactJsProjectSetup
 This repository provides the folder structure and configuration files to setup an integrated Django and ReactJs project.
-The Backend directory contains a Frontend directory, in this case the Frontend contains a ReactJs project.
+The Backend directory both the Django application and the ReactJs project in the Frontend directory.
 
 # Project setup procedure
 Initially the ReactJs project must be built, we use webpack to resolve all dependencies and bundle the required ReactJs and Vanilla Javascript files in a single bundle.js.
 In order to do so, webpack and its dependency node modules must be installed. The required development and production stage dependencies for the project are shown in the package.json file.
 
-If you intend to setup from barebones, the instructions provided below can help you to achieve the setup of a ReactJs project
-1) The package.json packages must first be installed with 'npm install package.json' followed by the definition of the .babelrc file.
-2) src folder must be created with Index.html, App.js and Index.js files, where the Index.html contains a div html element with an id of "root",
-App.js containing your main ReactJs application component and Index.js performs the rendering of your App.js component into your root div element.
-3) webpack.config.js must be configured to build a bundle.js file using the src directory; HTML, CSS and File loaders may need to be installed 
-and configured in the file, however they will be included in the package.json file.
-A folder named "dist" by default will be generated and containing the index.html file with the final bundle.js file embedded, the bundle.js file and licensing documentation.
-4) package.json should be configured with command line scripts to run the ReactJs project on the local webpack development server and using webpack
-to build the final bundle and HTML files.
-5) Initialize a Django project.
-6) Define the settings.py templates variable to search within the Frontend webpack generated "dist" folder 
-7) Define STATICFILES_DIRS containing a list of directory search paths for static files, the paths will be searched when static URL requests are made. 
+For setting the project from barebones, the instructions will allow you to complete the setup of both the Django and React projects.
+1) Install package.json file using node package manager, with 'npm install -y'
+2) Install React with npm:
+npm install react react-dom 
+react and react-dom node packages will be apart of your production dependencies, you can view them in package.json
+3) Install Babel with npm:
+npm install babel --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
+--save-dev installs the following babel packages as dependencies only for development, you can view them in package.json
+4) Create the .babelrc file with the following definition, to configure the babel node package to use the following presets:
+{ 
+    "presets": ["@babel/preset-react", "@babel/preset-env"] 
+}
+5) Install Webpack, loaders and plugins with npm for dependency resolving and project building:
+npm install --save-dev webpack webpack-cli webpack-dev-server style-loader file-loader css-loader html-webpack-plugin
+--save-dev installs the following webpack, loaders and plugins as development dependencies
+6) Create the webpack.config file to configure webpack to begin building from entry points and outputting a final bundle file, add a definition suitable for your project, example below:
+const HtmlWebpackPlugin = require("html-webpack-plugin"); 
+const path = require("path"); 
+
+module.exports = { 
+  entry: "./src/main.js", 
+  output: { 
+    filename: "bundle.[hash].js", 
+    path: path.resolve(__dirname, "dist"), 
+  }, 
+  mode: 'development', 
+  plugins: [ 
+    new HtmlWebpackPlugin({ 
+      template: "./src/index.html", 
+    }), 
+  ], 
+  resolve: { 
+    modules: [__dirname, "src", "node_modules"], 
+    extensions: ["*", ".js", ".jsx", ".tsx", ".ts"], 
+  }, 
+  module: { 
+    rules: [ 
+      { 
+        test: /\.jsx?$/, 
+        exclude: /node_modules/, 
+        loader: require.resolve("babel-loader"), 
+      }, 
+      { 
+        test: /\.css$/, 
+        use: ["style-loader", "css-loader"], 
+      }, 
+      { 
+        test: /\.png|svg|jpg|gif$/, 
+        use: ["file-loader"], 
+      }, 
+    ], 
+  }, 
+};
+7) Create the entry directory and files from which webpack begins project building and dependency resolving, in the above example:
+Webpack is configured to begin building from the src entry directory with the main.js file, and template generation using the index.html
+(Note: the index.html file should include a div with an id of root and the main.js file should import and render your app component from app.js)
+8) Configure the package.json scripts key by adding a javascript object with string key's and string npm commands for running the ReactJs project locally using webpack development server and building the production files for the ReactJs project(index.html and bundle.js)
+to build the final bundle and HTML files
+The React project has been build correctly
+
+1) Create a virtual environment for Python, initalize a project and create a django application
+2) Move the frontend application directory into the django project directory
+3) Define settings.py templates variable to search within the frontend directory webpack generated "dist" folder 
+12) Define STATICFILES_DIRS containing a list of directory search paths for static files, the paths will be searched when static URL requests are made. 
 The paths should include the path to the Frontend/dist folder.
-8) Define STATIC_URL to a URL path of your choosing, this URL path will be removed from the URL request to a static file and matched with paths
+13) Define STATIC_URL to a URL path of your choosing, this URL path will be removed from the URL request to a static file and matched with paths
 in the STATICFILES_DIR
 e.g <script defer="defer" src="/assets/Core_CRUD/bundle.js">, /assets/ will be removed and the remaining path matched in paths within STATICFILES_DIRS
 
