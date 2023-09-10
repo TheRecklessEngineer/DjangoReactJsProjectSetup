@@ -66,13 +66,15 @@ Webpack is configured to begin building from the src entry directory with the ma
 to build the final bundle and HTML files
 The React project has been build correctly
 
-1) Create a virtual environment for Python, initalize a project and create a django application
+1) Create a virtual environment for Python, initalize a project and create a django application.
+In our project, the top level Backend directory is our virtual environment, the second level directory is our Django project and the Core_CRUD directory is our django application
 2) Move the frontend application directory into the django project directory
-3) Define settings.py templates variable to search within the frontend directory webpack generated "dist" folder 
-12) Define STATICFILES_DIRS containing a list of directory search paths for static files, the paths will be searched when static URL requests are made. 
-The paths should include the path to the Frontend/dist folder.
-13) Define STATIC_URL to a URL path of your choosing, this URL path will be removed from the URL request to a static file and matched with paths
-in the STATICFILES_DIR
-e.g <script defer="defer" src="/assets/Core_CRUD/bundle.js">, /assets/ will be removed and the remaining path matched in paths within STATICFILES_DIRS
+3) In settings.py, define the templates variable with a list containing a string path to the directory containing the html files of the frontend application 
+In our example, this becomes [BASE_DIR / 'FrontEnd/dist/templates']
+4) In settings.py, define STATIC_URL with a string URL path of your choosing, this URL path will be removed from the URL request for a static file.
+e.g STATIC_URL = '/assets/'
+5) In settings.py, define STATICFILES_DIRS containing a list of directory paths for searching any static files, define a string containing the directory path to where the static files appear in the frontend directory. In our example, [BASE_DIR / 'FrontEnd/dist'] will be searched, followed by the remaining URl to the request static file as a result of truncation.
+e.g <script defer="defer" src="/assets/Core_CRUD/bundle.js">, /assets/ will be removed, determined by the STATIC_URL = '/assets/' variable in settings.py. Core_CRUD/bundle.js is searched in [BASE_DIR / 'FrontEnd/dist'].
+The paths will be searched when URL requests to the static file is made. e.g Embedding URL to static file in html template or ajax requests 
 
 Alternatively for a simpler approach, its possible to clone the project to your working directory using "git clone". Changing the configuration of webpack.config.js, package.json, django settings.py and dist folder build files to suit your application requirements.
